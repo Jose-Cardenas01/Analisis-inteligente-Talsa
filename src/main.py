@@ -56,3 +56,37 @@ clientes_ventas["monto_usd"] = pd.to_numeric(
         .str.replace(r"[$,\s]", "", regex=True),
     errors="coerce"
 )
+
+def normalizar_codigo(valor):
+
+    return re.sub(r"[^A-Z0-9]", "", str(valor).upper())
+
+
+clientes_ventas["codigo_equipo"] = (
+    clientes_ventas["equipo_comprado"]
+    .apply(normalizar_codigo)
+)
+
+bloques_catalogo = re.split(
+    r"(?=^(?:PASTEURIZADOR|CALDERA|LIOFILIZADOR)\b)",
+    txt_catalogo.strip(),
+    flags=re.IGNORECASE | re.MULTILINE
+)
+
+equipos = []
+
+for bloque in bloques_catalogo:
+
+    coincidencia = re.search(r"\b(PX[\s-]?3000|CV[\s-]?150|LF[\s-]?50)\b", bloque, flags=re.IGNORECASE)
+
+    if coincidencia:
+
+        codigo = normalizar_codigo(coincidencia.group())
+
+        equipos.append({
+            "codigo_equipo": codigo,
+            "ficha_tecnica": bloque.strip()
+        })
+
+
+catalogo_equipos = pd.DataFrame(equipos)
