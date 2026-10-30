@@ -2,40 +2,51 @@
 from src.Procesamiento.cargar_datos import cargar_datos
 from src.Procesamiento.limpieza import limpiar_datos
 from src.Procesamiento.relaciones import relacionar_datos
+from src.informes.pdf import generar_informes
+from src.informes.dataset import generar_dataset
 
 from src.IA.gemini import analizar_ventas
 
 
-def main():
+# 1. Cargar los archivos
+clientes_ventas, txt_catalogo, txt_cliente = cargar_datos()
 
-    clientes_ventas, txt_catalogo, txt_cliente = cargar_datos()
+# 2. Limpiar los datos
+clientes_ventas = limpiar_datos(clientes_ventas)
 
-    clientes_ventas = limpiar_datos(clientes_ventas)
+# 3. Relacionar ventas, equipos y perfiles
+ventas_completas = relacionar_datos(
+    clientes_ventas,
+    txt_catalogo,
+    txt_cliente
+)
 
-    ventas_completas = relacionar_datos(clientes_ventas, txt_catalogo, txt_cliente)
+# 4. Analizar las ventas con Gemini
+df_resultados_ia = analizar_ventas(ventas_completas)
 
-    df_resultados_ia = analizar_ventas(ventas_completas)
+# Generar dataset para Looker Studio
+generar_dataset(ventas_completas, df_resultados_ia)
 
-    columnas = [
-        "id_venta",
-        "empresa",
-        "score_compatibilidad",
-        "complejidad",
-        "justificacion_score"
-    ]
+# 5. Generar los informes PDF
+generar_informes(ventas_completas, df_resultados_ia)
 
-    if not df_resultados_ia.empty:
+# 6. Mostrar resultados
+columnas = [
+    "id_venta",
+    "empresa",
+    "score_compatibilidad",
+    "complejidad",
+    "justificacion_score"
+]
 
-        print(
-            df_resultados_ia[columnas].to_string(index=False)
-        )
+if not df_resultados_ia.empty:
 
-        print("\nCampos vacíos:")
-        print(df_resultados_ia.isnull().sum())
+    print(
+        df_resultados_ia[columnas].to_string(index=False)
+    )
 
-    else:
-        print("No se generaron resultados de IA.")
+    print("\nCampos vacíos:")
+    print(df_resultados_ia.isnull().sum())
 
-
-if __name__ == "__main__":
-    main()
+else:
+    print("No se generaron resultados de IA.")
