@@ -1,0 +1,48 @@
+﻿id_venta,id_cliente,empresa_x,industria,equipo_comprado_x,fecha_venta,monto_usd,ubicacion,codigo_equipo,ficha_tecnica,perfil_cliente,empresa_y,equipo_comprado_y,casos_uso,recomendaciones_operativas,limitaciones_tecnicas,score_compatibilidad,complejidad,justificacion_score,estado_analisis_ia
+V-2026-0101,CLI-001,Lácteos del Valle S.A.S.,Alimentos y Bebidas,Pasteurizador de placas PX-3000,2026-03-14,48500,"{'ciudad': 'Cali', 'departamento': 'Valle del Cauca', 'pais': 'Colombia'}",PX3000,"#### pasteurizador placas modelo px3000 ####
+equipo de intercambio termico por placas en acero inox AISI 316L, 3 secciones (regeneracion / calentamiento / enfriamiento)
+capacidad nominal: 3.000 L/h (leche entera), se puede bajar a 2000 l/h con jugos de alta viscosidad
+temp. de pasteurizacion ajustable 72 a 85 °C   -- retencion 15 seg a 72°C (HTST)
+salida de producto enfriado: 4°C +/- 1
+regeneracion termica aprox 90%
+Potencia instalada 11 kW ; alimentacion 220/440V trifasico 60Hz
+presion max de trabajo 6 bar
+tolerancia control de temperatura: +- 0.5 °C (PLC + PT100)
+CIP integrado, valvula de desvio de flujo automatica si no se alcanza temp. minima
+nota tecnico (J.R.): ojo con el agua de servicio, pide agua helada a 2°C para llegar a 4°C de salida
+dimensiones 2.4 x 1.2 x 2.1 m , peso 980 kg en vacio","Lácteos del Valle S.A.S. — planta en Cali. Recibe unos 25.000 litros de leche cruda al día de
+fincas de la región, en dos turnos. Produce leche pasteurizada en bolsa, yogur y kumis. Hoy
+pasteuriza en tanques por lotes (63 °C por 30 min) y quiere pasar a proceso continuo para subir
+productividad. Tiene un banco de hielo pequeño y en temporada seca el agua de servicio llega
+caliente. Le preocupa cumplir con el INVIMA y reducir el consumo de energía.",,,,,,,,,Pendiente
+V-2026-0102,CLI-002,Hilandería Andina S.A.,Textil,Caldera pirotubular CV-150,2026-05-02,76200,"{'ciudad': 'Medellín', 'departamento': 'Antioquia', 'pais': 'Colombia'}",CV150,"-----------------
+CALDERA  -  CV150  (pirotubular, 3 pasos)
+Produccion vapor: 2.350 kg/h a 100°C equiv. --- 150 BHP
+Presion de diseño 150 psi / trabajo recomendado 125 psi (8.6 bar aprox)
+combustible gas natural o GLP, quemador modulante, consumo GN aprox 180 m3/h a plena carga
+eficiencia 85% (segun fabricante, combustion)
+motor ventilador quemador 7.5 HP + bomba alimentacion 3 HP -> 440V 3F
+temperatura gases chimenea < 230 °C
+requiere tratamiento de agua (dureza < 2 ppm), purga de fondo diaria !!
+tolerancia presostato de operacion: +/- 3 psi
+tiempo arranque en frio aprox 45 min
+** el cliente debe tener sala de calderas con ventilacion y operador certificado **","Hilandería Andina S.A. — Medellín. Hila y tiñe algodón y mezclas de poliéster; la tintorería
+trabaja 24/7 con autoclaves de teñido a 130 °C y secadores que piden vapor saturado a 7 bar.
+Su caldera actual (90 BHP, carbón) se queda corta en picos y la autoridad ambiental le exige
+migrar a gas natural. Tiene sala de calderas propia; el agua de pozo es dura y el ablandador
+actual está viejo. Quiere bajar paradas no programadas.",Hilandería Andina S.A.,Caldera pirotubular CV-150,"Generación de vapor saturado para autoclaves de teñido de hilandería a 130 °C, cumpliendo con la demanda de 7 bar de presión requerida.; Suministro de vapor para secadores de hilandería, garantizando vapor saturado a 7 bar.; Sustitución de la caldera actual de 90 BHP para superar la insuficiencia en picos de demanda de la hilandería.; Migración a combustible gas natural para cumplir con normativas ambientales y reducir la huella de carbono, atendiendo la exigencia de la autoridad ambiental.","Actualizar o reemplazar completamente el sistema de tratamiento de agua existente para asegurar una dureza inferior a 2 ppm, un requisito crítico para la operación segura y la vida útil de la caldera CV150.; Verificar y, si es necesario, adecuar la ventilación de la sala de calderas del cliente para cumplir con los requisitos del nuevo equipo.; Asegurar que el personal operador de la caldera cuente con la certificación requerida para este tipo de equipo y su presión de operación.; Implementar un programa de purga de fondo diaria estricto para mantener la calidad del agua dentro de la caldera, según las especificaciones del fabricante.; Confirmar la disponibilidad y capacidad de suministro de gas natural en las instalaciones del cliente, considerando un consumo aproximado de 180 m3/h a plena carga.; Verificar que la infraestructura eléctrica del cliente pueda soportar los motores del ventilador del quemador (7.5 HP) y de la bomba de alimentación (3 HP) a 440V 3F.","El ablandador de agua actual del cliente es obsoleto e insuficiente para cumplir con la especificación de dureza (< 2 ppm) de la nueva caldera, lo que representa una inversión significativa y crítica antes de la puesta en marcha.; El tiempo de arranque en frío de la caldera es de aproximadamente 45 minutos, lo cual debe ser considerado en la planificación operativa y de respuesta a la demanda.; Aunque el cliente dispone de sala de calderas, se debe verificar que el espacio sea adecuado para la instalación de una caldera de mayor capacidad (150 BHP vs 90 BHP actual) y que la infraestructura de chimenea existente sea compatible o requiera ajustes.",70.0,Alto,"La compatibilidad es favorable en aspectos clave como la capacidad de producción (150 BHP supera la demanda actual de 90 BHP y los picos), la presión de operación (8.6 bar es suficiente para los 7 bar requeridos) y el tipo de combustible (gas natural se alinea con la normativa ambiental). Sin embargo, el score se modera debido a la necesidad crítica de una actualización profunda o reemplazo del sistema de tratamiento de agua del cliente para cumplir con la estricta dureza (< 2 ppm) que requiere la caldera. Adicionalmente, se requieren verificaciones y posibles adecuaciones en la ventilación de la sala de calderas, la capacidad de suministro de gas natural, la infraestructura eléctrica, la compatibilidad de la chimenea y la certificación del operador.",Analizado
+V-2026-0103,CLI-003,Laboratorios Biofarma Ltda.,Farmacéutica,Liofilizador industrial LF-50,2026-07-21,132000,"{'ciudad': 'Bogotá', 'departamento': 'Cundinamarca', 'pais': 'Colombia'}",LF50,"---  LIOFILIZADOR LF 50 / grado farmaceutico ---
+area de bandejas 5 m2 (10 bandejas), carga de hielo 50 kg por ciclo
+temperatura de bandejas: -50 °C a +60 °C
+condensador: -75 °C (cascada), capacidad condensador 60 kg
+vacio final < 5 Pa (0,05 mbar)
+uniformidad temperatura entre bandejas: +/- 1 °C
+potencia total 38 kW, 380-440 V / 3 fases / 60 Hz
+camara y bandejas AISI 316L electropulido Ra < 0.4 um , diseño GMP, CIP/SIP (vapor limpio 121°C)
+registro de datos con audit trail (21 CFR part 11)
+ciclo tipico 24-72 h segun producto
+agua de enfriamiento: 15 m3/h a 25 °C max","Laboratorios Biofarma Ltda. — Bogotá. Fabrica antibióticos inyectables y quiere producir
+vacunas veterinarias liofilizadas en viales para exportar. Trabaja en sala limpia grado B con
+buenas prácticas de manufactura (BPM/GMP) y auditorías de clientes del exterior. Lotes pequeños
+(unos 8.000 viales de 10 mL por ciclo) y alta exigencia en validación, trazabilidad de datos e
+integridad del registro electrónico. Bogotá está a 2.600 m s. n. m.",,,,,,,,,Pendiente

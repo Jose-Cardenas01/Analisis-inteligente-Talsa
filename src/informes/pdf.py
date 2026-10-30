@@ -162,6 +162,40 @@ def extraer_especificaciones(ficha_tecnica, estilos):
         ]
     ]
 
+    patrones = [
+        (r"^(?:equipo de intercambio térmico|equipo de intercambio termico)", "Descripción"),
+        (r"^capacidad nominal", "Capacidad"),
+        (r"^temp\.? de pasteurización|^temp\.? de pasteurizacion", "Temperatura de pasteurización"),
+        (r"^salida de producto", "Temperatura de salida"),
+        (r"^regeneración térmica|^regeneracion termica", "Regeneración térmica"),
+        (r"^potencia instalada", "Potencia"),
+        (r"^presión máxima|^presion max", "Presión máxima"),
+        (r"^presión de diseño|^presion de diseño|^presion de diseno", "Presión"),
+        (r"^tolerancia control de temperatura", "Control de temperatura"),
+        (r"^tolerancia presostato", "Presostato"),
+        (r"^cip integrado", "Sistema CIP"),
+        (r"^nota técnico|^nota tecnico", "Nota técnica"),
+        (r"^dimensiones", "Dimensiones"),
+        (r"^producción vapor|^produccion vapor", "Producción de vapor"),
+        (r"^combustible", "Combustible"),
+        (r"^eficiencia", "Eficiencia"),
+        (r"^motor", "Motor"),
+        (r"^temperatura gases", "Temperatura de gases"),
+        (r"^requiere tratamiento de agua", "Tratamiento de agua"),
+        (r"^tiempo arranque", "Tiempo de arranque"),
+        (r"^\*\* el cliente", "Requisitos de instalación"),
+        (r"^área de bandejas|^area de bandejas", "Área de bandejas"),
+        (r"^temperatura de bandejas", "Temperatura de bandejas"),
+        (r"^condensador", "Condensador"),
+        (r"^vacío final|^vacio final", "Vacío"),
+        (r"^uniformidad temperatura", "Uniformidad de temperatura"),
+        (r"^potencia total", "Potencia"),
+        (r"^cámara y bandejas|^camara y bandejas", "Material y diseño"),
+        (r"^registro de datos", "Registro de datos"),
+        (r"^ciclo típico|^ciclo tipico", "Duración del ciclo"),
+        (r"^agua de enfriamiento", "Agua de enfriamiento")
+    ]
+
     for linea in str(ficha_tecnica).splitlines():
 
         linea = linea.strip()
@@ -169,14 +203,28 @@ def extraer_especificaciones(ficha_tecnica, estilos):
         if not linea:
             continue
 
-        if ":" in linea:
-
-            caracteristica, especificacion = linea.split(":", 1)
-
-        else:
-
+        # Reconocer el nombre del equipo como descripción.
+        if re.match(r"^(?:caldera|liofilizador|pasteurizador)", linea, re.IGNORECASE):
             caracteristica = "Descripción"
             especificacion = linea
+
+        else:
+            caracteristica = None
+            especificacion = linea
+
+            for patron, nombre in patrones:
+                if re.search(patron, linea, re.IGNORECASE):
+                    caracteristica = nombre
+
+                    # Si existe :, quitar el nombre de la característica.
+                    if ":" in linea:
+                        especificacion = linea.split(":", 1)[1].strip()
+
+                    break
+
+            # Si no se reconoce la característica, conservar toda la línea.
+            if caracteristica is None:
+                caracteristica = "Descripción"
 
         filas.append([
             crear_parrafo(caracteristica, estilos["pequeno"]),

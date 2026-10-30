@@ -24,8 +24,8 @@ ventas_completas = relacionar_datos(
 # 4. Analizar las ventas con Gemini
 df_resultados_ia = analizar_ventas(ventas_completas)
 
-# Generar dataset para Looker Studio
-generar_dataset(ventas_completas, df_resultados_ia)
+# 5. Generar dataset para Looker Studio
+dataset = generar_dataset(ventas_completas, df_resultados_ia)
 
 # 5. Generar los informes PDF
 generar_informes(ventas_completas, df_resultados_ia)

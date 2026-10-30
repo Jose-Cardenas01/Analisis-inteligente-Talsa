@@ -67,7 +67,22 @@ def analizar_ventas(ventas_completas):
                 f"Error de Gemini en la venta "
                 f"{venta['id_venta']}: {error}"
             )
+    
+    columnas_resultados = [
+        "id_venta",
+        "empresa",
+        "equipo_comprado",
+        "casos_uso",
+        "recomendaciones_operativas",
+        "limitaciones_tecnicas",
+        "score_compatibilidad",
+        "complejidad",
+        "justificacion_score"
+    ]
 
-    df_resultados_ia = pd.DataFrame(resultados_ia)
+    df_resultados_ia = pd.DataFrame(
+        resultados_ia,
+        columns=columnas_resultados
+    )
 
     return df_resultados_ia
