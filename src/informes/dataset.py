@@ -12,9 +12,21 @@ def generar_dataset(ventas_completas, df_resultados_ia):
     # Crear carpeta de salida si no existe
     CARPETA_DATASET.mkdir(parents=True, exist_ok=True)
 
+    columnas_ia = [
+        "id_venta",
+        "casos_uso",
+        "recomendaciones_operativas",
+        "limitaciones_tecnicas",
+        "score_compatibilidad",
+        "complejidad",
+        "justificacion_score"
+    ]
+
+    resultados_ia = df_resultados_ia[[columna for columna in columnas_ia if columna in df_resultados_ia.columns]].copy()
+
     dataset = pd.merge(
         ventas_completas,
-        df_resultados_ia,
+        resultados_ia,
         on="id_venta",
         how="left",
         validate="one_to_one"
@@ -41,6 +53,12 @@ def generar_dataset(ventas_completas, df_resultados_ia):
                 if isinstance(elementos, list)
                 else elementos
             )
+
+    dataset["fecha_venta"] = pd.to_datetime(
+        dataset["fecha_venta"],
+        dayfirst=True,
+        errors="coerce"
+    ).dt.strftime("%Y-%m-%d")
     
     # Exportar CSV
     dataset.to_csv(
