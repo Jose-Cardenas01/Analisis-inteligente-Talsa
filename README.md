@@ -248,14 +248,14 @@ Estos componentes permiten explorar los resultados desde diferentes perspectivas
 
 Durante el desarrollo se identificaron las siguientes limitaciones:
 
-- **Calidad de las fuentes:** la información técnica disponible es preliminar y algunos datos requieren validación con los fabricantes.
-- **Cruce de información:** la correspondencia por códigos de equipos y nombres de empresas depende de la consistencia de los datos originales. Diferencias importantes en los nombres o códigos pueden impedir una relación correcta.
-- **Dependencia de la API:** el análisis requiere conexión a Internet y disponibilidad de Google Gemini. Pueden presentarse errores temporales de disponibilidad o límites de cuota.
-- **Resultados de IA:** los scores y las recomendaciones son orientativos y no representan una certificación técnica ni sustituyen una evaluación realizada por especialistas.
-- **Contexto limitado:** la calidad del análisis depende de la cantidad, precisión y actualidad de la información proporcionada al modelo.
-- **Validación técnica:** las recomendaciones generadas deben revisarse antes de utilizarlas para tomar decisiones operativas o comerciales.
+- Calidad de las fuentes: la información técnica disponible es preliminar y algunos datos requieren validación con los fabricantes.
+- Cruce de información: la correspondencia por códigos de equipos y nombres de empresas depende de la consistencia de los datos originales. Diferencias importantes en los nombres o códigos pueden impedir una relación correcta.
+- Dependencia de la API: el análisis requiere conexión a Internet y disponibilidad de Google Gemini. Pueden presentarse errores temporales de disponibilidad o límites de cuota.
+- Resultados de IA: los scores y las recomendaciones son orientativos y no representan una certificación técnica ni sustituyen una evaluación realizada por especialistas.
+- Contexto limitado: la calidad del análisis depende de la cantidad, precisión y actualidad de la información proporcionada al modelo.
+- Validación técnica: las recomendaciones generadas deben revisarse antes de utilizarlas para tomar decisiones operativas o comerciales.
 
-## 9. Mejoras futuras
+9. Mejoras futuras
 
 Con más tiempo y recursos, se podrían implementar las siguientes mejoras:
 
